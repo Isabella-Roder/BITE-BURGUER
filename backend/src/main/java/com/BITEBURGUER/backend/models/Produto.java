@@ -28,7 +28,6 @@ public class Produto {
     @Column(nullable = false, length = 500)
     private String descricao;
 
-    @Column(nullable = false)
     private String imgUrl;
 
     @Column(nullable = false, precision = 19, scale = 2)
