@@ -1,32 +1,34 @@
-# React + TypeScript + Vite
+# Byte Burguer — frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+React, TypeScript, Vite e React Router.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+npm install
+npm run dev
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+O Vite encaminha `/api` para o backend em `http://localhost:8080`. Quando a API está indisponível, a interface mostra produtos demonstrativos. O envio de pedidos ainda depende de implementação no backend.
+
+## Rotas
+
+| Endereço | Página | Arquivo |
+| --- | --- | --- |
+| `/` | Início, banner e cardápio | `src/pages/HomePage.tsx` |
+| `/cardapio` | Cardápio com busca e filtros | `src/pages/MenuPage.tsx` |
+| `/pedido` | Carrinho e formulário | `src/pages/OrderPage.tsx` |
+| Outros | Página não encontrada | `src/pages/NotFoundPage.tsx` |
+
+Adicione novas rotas em `src/routes/AppRoutes.tsx`. O cabeçalho e a navegação ficam em `src/components/SiteLayout.tsx`. Os componentes `Menu` e `OrderPanel` são compartilhados pelas páginas.
+
+`ShopProvider` mantém produtos, carrinho, filtros e dados do formulário durante a navegação. O estado fica em memória: recarregar a página o reinicia. A consulta à API está em `src/hooks/useShopState.ts`; os produtos de demonstração estão em `src/data/products.ts`.
+
+## Validação
+
+```bash
+npm run build
+npm run lint
+```
+
+## Publicação
+
+Configure o servidor de hospedagem para servir `index.html` nas rotas do frontend, incluindo `/cardapio` e `/pedido`, permitindo acesso direto e atualização da página. Encaminhe `/api` ao backend antes dessa regra; o proxy do Vite funciona apenas no desenvolvimento.
