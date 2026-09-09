@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.UUID;
 
 import com.BITEBURGUER.backend.enums.StatusPedido;
+import com.BITEBURGUER.backend.enums.TipoPedido;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -15,21 +16,12 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Index;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
-@Entity 
-@Table(name = "pedidos",
-    indexes = {
-        @Index (
-            name = "idx_pedido_item",
-            columnList = "fk_item_pedido"
-        )
-    }
-
-)
+@Entity
+@Table(name = "pedidos")
 public class Pedido {
     
     @Id 
@@ -39,17 +31,24 @@ public class Pedido {
     @Column(nullable = false, length = 80)
     private String nomeCliente;
 
-    @Column(nullable = false, length = 20)
+    @Column(length = 20)
     private String telefoneCliente;
 
-    @Column(nullable = false, length = 255)
+    @Column(length = 255)
     private String endereco;
+
+    @Column
+    private Integer numeroMesa;
 
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
     private List<ItemPedido> itens;
 
     @Column(nullable = false, precision = 19, scale = 2)
     private BigDecimal total;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private TipoPedido tipo;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
@@ -68,6 +67,7 @@ public class Pedido {
         String endereco,
         List<ItemPedido> itens,
         BigDecimal total,
+        TipoPedido tipo,
         StatusPedido status
     ) {
         this.nomeCliente = nomeCliente;
@@ -75,6 +75,7 @@ public class Pedido {
         this.endereco = endereco;
         this.itens = itens;
         this.total = total;
+        this.tipo = tipo;
         this.status = status;
     }
 
@@ -99,12 +100,20 @@ public class Pedido {
         return endereco;
     }
 
+    public Integer getNumeroMesa() {
+        return numeroMesa;
+    }
+
     public List<ItemPedido> getItens() {
         return itens;
     }
 
     public BigDecimal getTotal() {
         return total;
+    }
+
+    public TipoPedido getTipo() {
+        return tipo;
     }
 
     public StatusPedido getStatus() {
@@ -127,8 +136,20 @@ public class Pedido {
         this.endereco = endereco;
     }
 
+    public void setNumeroMesa(Integer numeroMesa) {
+        this.numeroMesa = numeroMesa;
+    }
+
     public void setItens(List<ItemPedido> itens) {
         this.itens = itens;
+    }
+
+    public void setTotal(BigDecimal total) {
+        this.total = total;
+    }
+
+    public void setTipo(TipoPedido tipo) {
+        this.tipo = tipo;
     }
 
     public void setStatus(StatusPedido status) {

@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.BITEBURGUER.backend.dtos.CadastroProdutoRequest;
 import com.BITEBURGUER.backend.dtos.ProdutoResponse;
+import com.BITEBURGUER.backend.exception.RecursoNaoEncontradoException;
 import com.BITEBURGUER.backend.models.Produto;
 import com.BITEBURGUER.backend.repository.ProdutoRepository;
 
@@ -24,7 +25,7 @@ public class ProdutoService {
 
     private Produto buscarEntidade(UUID id) {
         return produtoRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Produto não encontrado com ID: " + id));
+            .orElseThrow(() -> new RecursoNaoEncontradoException("Produto não encontrado com ID: " + id));
     }
 
     @Transactional 
