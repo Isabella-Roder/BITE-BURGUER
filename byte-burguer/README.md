@@ -7,7 +7,7 @@ npm install
 npm run dev
 ```
 
-O Vite encaminha `/api` para o backend em `http://localhost:8080`. Quando a API está indisponível, a interface mostra produtos demonstrativos. O envio de pedidos ainda depende de implementação no backend.
+O Vite encaminha `/api` para o backend em `http://localhost:8080`. Quando a API está indisponível, a interface mostra produtos demonstrativos. O formulário revisa e envia pedidos a `POST /api/pedidos`, mostrando o número retornado. Produtos demonstrativos não podem ser enviados. Inicie o backend e cadastre produtos reais para usar esse fluxo.
 
 ## Rotas
 
@@ -32,3 +32,14 @@ npm run lint
 ## Publicação
 
 Configure o servidor de hospedagem para servir `index.html` nas rotas do frontend, incluindo `/cardapio` e `/pedido`, permitindo acesso direto e atualização da página. Encaminhe `/api` ao backend antes dessa regra; o proxy do Vite funciona apenas no desenvolvimento.
+
+## Painel e acompanhamento
+
+- `/painel/produtos`: lista, ativa e desativa produtos.
+- `/painel/produtos/novo`: cadastra um produto.
+- `/painel/produtos/:id/editar`: consulta e salva alterações.
+- `/painel/pedidos`: lista pedidos, filtra por status e atualiza a cada 10 segundos.
+- `/painel/pedidos/:id`: mostra os itens e dados de entrega, permite avançar o status.
+- `/pedido/:id`: acompanhamento pelo cliente, sem controles administrativos.
+
+O acesso ao painel está no rodapé. Essas telas utilizam os endpoints reais e mostram erro quando a API está indisponível. Os serviços estão em `src/services/store.ts`. O backend atual não fornece autenticação do painel.

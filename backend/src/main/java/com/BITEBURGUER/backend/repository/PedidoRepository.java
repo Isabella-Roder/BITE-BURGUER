@@ -12,5 +12,7 @@ public interface PedidoRepository extends JpaRepository<Pedido, UUID>{
     
     List<Pedido> findByItensId(UUID itens);
 
-    List<Pedido> findByStatus(StatusPedido status);
+    List<Pedido> findByStatusOrderByDataHoraDesc(StatusPedido status);
+
+    List<Pedido> findAllByOrderByDataHoraDesc();
 }

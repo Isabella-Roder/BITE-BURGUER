@@ -11,7 +11,7 @@ export default function SiteLayout() {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
     main.current?.focus({ preventScroll: true });
-    document.title = `${pathname === '/' ? 'Início' : pathname === '/cardapio' ? 'Cardápio' : pathname === '/pedido' ? 'Meu pedido' : 'Página não encontrada'} | Byte Burguer`;
+    document.title = `${pathname === '/' ? 'Início' : pathname === '/cardapio' ? 'Cardápio' : pathname.startsWith('/pedido') ? 'Meu pedido' : 'Página não encontrada'} | Byte Burguer`;
   }, [pathname]);
   return (<>      <header className="header">
         <Link className="brand" to="/" aria-label="Byte Burguer — início"><span className="brand-icon" aria-hidden="true"><i /><i /><i /></span><span>BYTE<strong>BURGUER</strong></span></Link>
@@ -25,7 +25,7 @@ export default function SiteLayout() {
       </header>
 
     <main ref={main} tabIndex={-1} className={`layout${hasSidebar ? '' : ' layout-single'}`}>
-      <div className="catalog"><Outlet /><footer>© {new Date().getFullYear()} Byte Burguer <span>Hambúrgueres, combos e bebidas.</span></footer></div>
+      <div className="catalog"><Outlet /><footer>© {new Date().getFullYear()} Byte Burguer <Link to="/painel">Painel da loja</Link></footer></div>
       {hasSidebar && <OrderPanel />}
     </main>
     <div className="sr-only" role="status" aria-live="polite">{notice}</div>

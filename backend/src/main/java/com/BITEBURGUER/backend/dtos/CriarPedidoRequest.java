@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.BITEBURGUER.backend.enums.TipoPedido;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -37,7 +38,10 @@ public record CriarPedidoRequest(
     @Positive(message = "Numero da mesa deve ser positivo")
     Integer numeroMesa,
 
+    @Size(max = 150, message = "Complemento deve conter no máximo 150 caracteres")
+    String complemento,
+
     @NotEmpty(message = "Pedido precisa ter ao menos um item")
-    List<ItemPedidoRequest> itens
+    List<@NotNull @Valid ItemPedidoRequest> itens
 ) {
 }

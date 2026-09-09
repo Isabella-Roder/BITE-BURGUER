@@ -16,13 +16,15 @@ public record CadastroProdutoRequest(
         String nome,
 
         @NotBlank(message = "Descrição é obrigatória.")
-        @Size(max = 500, message = "Descrição deve ter no máximo 255 caracteres.")
+        @Size(max = 500, message = "Descrição deve ter no máximo 500 caracteres.")
         String descricao,
 
+        @Size(max = 255, message = "URL da imagem deve ter no máximo 255 caracteres.")
         String imgUrl,
 
         @NotNull(message = "Preço é obrigatório.")
         @DecimalMin(value = "0.0", inclusive = false, message = "Preço deve ser maior que zero.")
+        @jakarta.validation.constraints.Digits(integer = 17, fraction = 2, message = "Preço deve ter no máximo duas casas decimais.")
         BigDecimal preco,
 
         @NotNull(message = "Categoria é obrigatória.")

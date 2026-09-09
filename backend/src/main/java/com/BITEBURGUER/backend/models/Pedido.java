@@ -37,6 +37,13 @@ public class Pedido {
     @Column(length = 255)
     private String endereco;
 
+    @Column(length = 150)
+    private String complemento;
+
+    public String getComplemento() { return complemento; }
+
+    public void setComplemento(String complemento) { this.complemento = complemento; }
+
     @Column
     private Integer numeroMesa;
 

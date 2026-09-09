@@ -58,8 +58,9 @@ public class PedidoService {
         pedido.setNomeCliente(request.nomeCliente());
         pedido.setTelefoneCliente(request.telefoneCliente());
         pedido.setTipo(request.tipo());
-        pedido.setEndereco(request.endereco());
-        pedido.setNumeroMesa(request.numeroMesa());
+        pedido.setEndereco(request.tipo() == TipoPedido.DELIVERY ? request.endereco() : null);
+        pedido.setComplemento(request.tipo() == TipoPedido.DELIVERY ? request.complemento() : null);
+        pedido.setNumeroMesa(request.tipo() == TipoPedido.MESA ? request.numeroMesa() : null);
         pedido.setStatus(StatusPedido.NOVO);
 
         List<ItemPedido> itens = request.itens().stream()
@@ -77,6 +78,9 @@ public class PedidoService {
 
     private ItemPedido criarItem(Pedido pedido, ItemPedidoRequest itemRequest) {
         Produto produto = buscarProduto(itemRequest.produtoId());
+        if (!produto.isAtivo()) {
+            throw new IllegalArgumentException("Produto indisponível: " + produto.getNome());
+        }
         ItemPedido item = new ItemPedido(produto, itemRequest.quantidade());
         item.setPedido(pedido);
         return item;
@@ -84,7 +88,7 @@ public class PedidoService {
 
     @Transactional(readOnly = true)
     public List<PedidoResponse> listar() {
-        return pedidoRepository.findAll().stream()
+        return pedidoRepository.findAllByOrderByDataHoraDesc().stream()
             .map(PedidoResponse::from).toList();
     }
 
@@ -95,13 +99,24 @@ public class PedidoService {
 
     @Transactional(readOnly = true)
     public List<PedidoResponse> listarPorStatus(StatusPedido status) {
-        return pedidoRepository.findByStatus(status).stream()
+        return pedidoRepository.findByStatusOrderByDataHoraDesc(status).stream()
             .map(PedidoResponse::from).toList();
     }
 
     @Transactional
     public PedidoResponse atualizarStatus(UUID id, StatusPedido novoStatus) {
         Pedido pedido = buscarEntidade(id);
+        if (pedido.getStatus() == novoStatus) return PedidoResponse.from(pedido);
+        StatusPedido proximo = switch (pedido.getStatus()) {
+            case NOVO -> StatusPedido.PREPARADO;
+            case PREPARADO -> pedido.getTipo() == TipoPedido.DELIVERY
+                ? StatusPedido.SAIU_PARA_ENTREGA : StatusPedido.ENTREGUE;
+            case SAIU_PARA_ENTREGA -> StatusPedido.ENTREGUE;
+            case ENTREGUE -> null;
+        };
+        if (novoStatus != proximo) {
+            throw new IllegalArgumentException("Transição de status inválida: " + pedido.getStatus() + " para " + novoStatus);
+        }
         pedido.setStatus(novoStatus);
         return PedidoResponse.from(pedidoRepository.save(pedido));
     }

@@ -964,3 +964,6 @@ footer {
 .order-page .order-panel { position: static; margin-bottom: 24px; }
 .empty h1 { margin-bottom: 12px; }
 .empty a { display: inline-block; color: #e9a56b; margin-top: 20px; }
+
+.order-fields { border: 0; padding: 0; margin: 0; min-width: 0; }
+.review-message { overflow-wrap: anywhere; }

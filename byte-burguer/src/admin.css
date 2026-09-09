@@ -1,0 +1,46 @@
+.admin-shell { min-height: 100vh; background: #101211; }
+.admin-header { border-bottom: 1px solid #30332d; display: flex; align-items: center; justify-content: space-between; padding: 24px max(24px, calc((100vw - 1100px)/2)); gap: 25px; }
+.admin-header > a { font-weight: 800; color: #e9a56b; white-space: nowrap; }
+.admin-header small { display: block; color: #a4aaa2; font-size: 11px; font-weight: 400; margin-top: 6px; }
+.admin-header nav { display: flex; gap: 24px; font-size: 13px; }
+.admin-header .active { color: #e9a56b; }
+.admin-main { max-width: 1150px; margin: auto; padding: 32px 24px 60px; }
+.admin-title { display: flex; justify-content: space-between; align-items: center; gap: 18px; margin: 24px 0; }
+.admin-title h1 { font-size: 28px; }
+.admin-title p { color: #a6aaa2; margin-top: 8px; font-size: 13px; }
+.admin-search { display: block; max-width: 400px; margin-bottom: 24px; font-size: 13px; }
+.admin-search input, .admin-search select, .admin-form input, .admin-form textarea, .admin-form select, .tracking-form input { width: 100%; display: block; background: #20231f; color: #eee; padding: 12px; border: 1px solid #41453a; border-radius: 5px; font: inherit; margin-top: 8px; }
+.admin-products, .admin-orders { display: grid; gap: 12px; }
+.admin-product, .order-row { background: #1a1d18; border: 1px solid #343a2e; padding: 20px; border-radius: 7px; display: flex; align-items: center; gap: 22px; }
+.admin-product > img { width: 95px; height: 90px; object-fit: cover; border-radius: 5px; }
+.admin-product > div:nth-child(2) { flex: 1; }
+.admin-product h2, .order-row h2 { font-size: 17px; margin: 8px 0; }
+.admin-product p, .order-row p { font-size: 12px; color: #a5afa0; margin-bottom: 10px; }
+.admin-product strong { color: #e9a56b; }
+.admin-actions { display: flex; align-items: center; gap: 15px; }
+.admin-actions a { font-size: 13px; color: #e9a56b; }
+.admin-shell button:not(.primary), .order-detail button:not(.primary) { background: #292e25; border: 1px solid #464c3e; border-radius: 5px; padding: 10px 15px; }
+.status { display: inline-block; color: #dec4a6; background: #393328; border-radius: 4px; padding: 5px 9px; font-size: 11px; }
+.status.available { color: #c0d6ab; background: #293724; }
+.admin-error { border: 1px solid #885648; background: #33221c; padding: 15px; margin: 18px 0; line-height: 1.7; }
+.admin-form { max-width: 650px; }
+.admin-form fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+.admin-form label { display: block; margin-bottom: 22px; font-size: 13px; }
+.admin-form label span { color: #989e91; }
+.order-row { justify-content: space-between; }
+.order-row:hover { border-color: #ad8255; }
+.order-row small { color: #8e9a86; }
+.order-row > strong { white-space: nowrap; font-size: 15px; }
+.order-detail { max-width: 800px; margin: auto; }
+.order-detail > p { color: #aaa; margin: 14px 0; }
+.order-id { overflow-wrap: anywhere; }
+.detail-box { background: #191d18; border: 1px solid #343b2e; border-radius: 6px; padding: 22px; margin: 20px 0; }
+.detail-box h2 { font-size: 18px; margin-bottom: 14px; }
+.detail-box p { font-size: 14px; color: #b2b9ac; margin: 8px 0; }
+.detail-item { display: flex; gap: 18px; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid #343a2e; font-size: 14px; }
+.detail-item:last-child { border: 0; }
+.tracking-form { background: #1a1d18; border: 1px solid #343a2e; border-radius: 6px; padding: 22px; margin-bottom: 50px; }
+.tracking-form h2 { font-size: 19px; margin-bottom: 18px; }
+.tracking-form label { font-size: 12px; }
+.tracking-form button { margin-top: 16px; }
+@media(max-width: 640px) { .admin-header { flex-direction: column; align-items: start; padding: 20px; } .admin-title { align-items: start; flex-direction: column; } .admin-main { padding: 20px 16px; } .admin-product { flex-wrap: wrap; gap: 14px; padding: 15px; } .admin-product .admin-actions { width: 100%; justify-content: flex-end; } .admin-product > img { width: 70px; height: 75px; } .order-row { align-items: start; flex-direction: column; } .admin-title h1 { font-size: 25px; } }
