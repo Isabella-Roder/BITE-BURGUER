@@ -8,7 +8,7 @@ import com.BITEBURGUER.backend.models.Produto;
 
 public record ProdutoResponse(
     UUID id,
-    String nome, 
+    String nome,
     String descricao,
     String imgUrl,
     BigDecimal preco,

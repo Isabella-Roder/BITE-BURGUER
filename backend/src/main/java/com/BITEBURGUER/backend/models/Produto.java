@@ -1,9 +1,11 @@
 package com.BITEBURGUER.backend.models;
 
-import java.math.BigDecimal;
 import java.util.UUID;
 
 import com.BITEBURGUER.backend.enums.CategoriaProduto;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,41 +14,79 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 
-@Entity
-@Table(name = "produtos")
+@Entity 
+@Table (
+    name = "produtos"
+)
 public class Produto {
     
     @Id 
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(nullable = false, length = 80)
+    @Column(name = "nome", nullable = false, length = 80)
     private String nome;
 
-    @Column(nullable = false, length = 500)
+    @Column(name = "descricao", nullable = false, length = 500)
     private String descricao;
 
+    @Column(name = "imagem_url", length = 255)
     private String imgUrl;
 
-    @Column(nullable = false, precision = 19, scale = 2)
+    @Column(name = "preco", nullable = false, precision = 19, scale = 2)
     private BigDecimal preco;
 
-    @Column(nullable = false)
+    @Column(name = "ativo", nullable = false)
     private boolean ativo = true;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(name = "categoria", nullable = false)
     private CategoriaProduto categoria;
+
+    @Column(name = "criado_em", nullable = false, updatable = false)
+    private LocalDateTime criadoEm;
+
+    @Column(name = "atualizado_em", nullable = false)
+    private LocalDateTime atualizadoEm;
 
     public Produto() {
 
     }
 
+    public Produto(
+        String nome,
+        String descricao,
+        String imgUrl,
+        BigDecimal preco,
+        CategoriaProduto categoria
+    ) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.imgUrl = imgUrl;
+        this.preco = preco;
+        this.categoria = categoria;
+    }
+
+    @PrePersist
+    private void antesDeSalvar() {
+        LocalDateTime agora = LocalDateTime.now();
+
+        criadoEm = agora;
+        atualizadoEm = agora;
+    }
+
+    @PreUpdate 
+    private void antesDeAtualizar() {
+        atualizadoEm = LocalDateTime.now();
+    }
+
     public void desativar() {
         if (!ativo) {
-            throw new IllegalArgumentException("Produto precisa estar ativo para desativar.");
+            throw new IllegalArgumentException("Produto precisa estar ativado para desativar.");
         }
 
         ativo = false;
@@ -86,6 +126,14 @@ public class Produto {
 
     public CategoriaProduto getCategoria() {
         return categoria;
+    }
+
+    public LocalDateTime getCriadoEm() {
+        return criadoEm;
+    }
+
+    public LocalDateTime getAtualizadoEm() {
+        return atualizadoEm;
     }
 
     public void setNome(String nome) {
