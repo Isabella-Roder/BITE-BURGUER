@@ -1,9 +1,11 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import CardapioPage from './pages/CardapioPage';
 import Layout from './components/Layout';
-import CarrinhoPage from './pages/CarrinhoPage';
 import CadastroProdutoPage from './pages/CadastroProdutoPage';
+import CheckoutPage from './pages/CheckoutPage';
+import ConfirmacaoPage from './pages/ConfirmacaoPage';
+import AdminPedidosPage from './pages/AdminPedidosPage';
 
 export default function App() {
 
@@ -13,9 +15,10 @@ export default function App() {
     <Routes>
       <Route element={<Layout/>}>
         <Route path='/' element={<CardapioPage />} />
-        <Route path='/carrinho' element={<CarrinhoPage />} />
-
+        <Route path='/checkout' element={<CheckoutPage />} />
+        <Route path='/confirmacao' element={<ConfirmacaoPage />}/>
         <Route path='/admin/produtos/novo' element={<CadastroProdutoPage />} />
+        <Route path='/admin/pedidos' element={<AdminPedidosPage />} />
       </Route>
     </Routes>
   );

@@ -1,6 +1,7 @@
 import { Plus } from "lucide-react";
 import type { Produto } from "../types/Produto"
 import { formatarPreco } from "../utils/dinheiro";
+import { useCarrinho } from "../context/CarrinhoContext";
 
 type ProdutoCardProps = {
     produto: Produto;
@@ -8,6 +9,7 @@ type ProdutoCardProps = {
 
 export default function ProdutoCard({ produto }: ProdutoCardProps) {
     
+    const { adicionar } = useCarrinho();
 
     return (
         <article className="product">
@@ -22,7 +24,7 @@ export default function ProdutoCard({ produto }: ProdutoCardProps) {
                     <strong className="product-price">{formatarPreco(produto.preco)}</strong>
                 </div>
 
-                <button className="add-btn" aria-label={`Adicionar ${produto.nome}`}>
+                <button className="add-btn" aria-label={`Adicionar ${produto.nome}`} onClick={() => adicionar(produto)}>
                     <Plus size={20} />
                 </button>
             </div>

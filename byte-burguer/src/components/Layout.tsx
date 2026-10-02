@@ -1,5 +1,6 @@
 import { MapPin, Search, User } from "lucide-react";
 import { NavLink, Outlet } from "react-router-dom";
+import PedidoResumo from "./PedidoResumo";
 
 export default function Layout() {
     return (
@@ -18,8 +19,8 @@ export default function Layout() {
 
                 <nav className="nav">
                     <NavLink to="/" end>Início</NavLink>
-                    <NavLink to="/carrinho">Pedido</NavLink>
                     <NavLink to="/admin/produtos/novo">Novo produto</NavLink>
+                    <NavLink to="/admin/pedidos">Pedidos (admin)</NavLink>
                 </nav>
 
                 <div className="header-actions">
@@ -51,7 +52,7 @@ export default function Layout() {
                 </main>
 
                 <aside className="order-sidebar">
-                    <h2>Seu pedido</h2>
+                    <PedidoResumo />
                 </aside>
             </div>
         </div>

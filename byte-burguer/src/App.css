@@ -252,3 +252,374 @@
 .add-btn:hover {
     transform: scale(1.12);
 }
+
+.order-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.order-head h2 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+}
+
+.link-btn {
+    background: none;
+    border: 0;
+    padding: 4px;
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.link-btn:hover {
+    color: var(--accent);
+}
+
+.order-empty {
+    margin: 0;
+    font-size: 14px;
+    color: var(--muted);
+}
+
+.order-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin: 0 0 16px;
+    padding: 0;
+    list-style: none;
+}
+
+.order-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+}
+
+.order-item img {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.order-item-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-size: 13px;
+}
+
+.order-item-info span {
+    color: var(--muted);
+}
+
+.qty {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    width: fit-content;
+    margin-top: 4px;
+    padding: 2px 6px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+}
+
+.qty button {
+    display: grid;
+    place-items: center;
+    background: none;
+    border: none;
+    padding: 2px;
+}
+
+.order-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 16px;
+    font-size: 16px;
+}
+
+.order-total strong {
+    font-size: 24px;
+    color: var(--accent);
+}
+
+.btn-primary {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    text-align: center;
+    font-weight: 700;
+    color: #fff;
+    background: var(--gradient);
+    border: none;
+    border-radius: var(--radius);
+    font-size: 15px;
+}
+
+.btn-primary:hover:not(:disabled) {
+    filter: brightness(1.1);
+}
+
+.btn-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.checkout-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 480px;
+}
+
+.checkout-form label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.checkout-form input {
+    padding: 12px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-size: 14px;
+}
+
+.checkout-form input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+.checkout-form fieldset {
+    display: flex;
+    gap: 16px;
+    padding: 0;
+    border: none;
+}
+
+.checkout-form fieldset legend {
+    width: 100%;
+    margin-bottom: 8px;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.checkout-form fieldset label {
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--text);
+}
+
+.checkout-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    padding-top: 8px;
+    border-top: 1px solid var(--border);
+}
+
+.checkout-total strong {
+    color: var(--accent);
+}
+
+.checkout-erro {
+    margin: 0;
+    padding: 10px 14px;
+    background: rgba(255, 90, 20, 0.12);
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--accent);
+}
+
+.confirmacao {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    max-width: 420px;
+}
+
+.confirmacao p {
+    color: var(--muted);
+}
+
+.confirmacao a {
+    padding: 12px 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-weight: 600;
+}
+
+.confirmacao a:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.admin-pedidos {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.admin-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.status-filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.status-filtro {
+    padding: 8px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+    transition: color 0.15s, border-color 0.15s;
+}
+
+.status-filtro:hover {
+    color: var(--text);
+}
+
+.status-filtro.ativo {
+    color: var(--accent);
+    border-color: var(--accent);
+}
+
+.pedido-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 16px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.pedido-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 18px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+}
+
+.pedido-card-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.pedido-card-head > div {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.pedido-card-head > span {
+    font-size: 12px;
+    color: var(--muted);
+    white-space: nowrap;
+}
+
+.status-badge {
+    display: inline-block;
+    width: fit-content;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.status-novo {
+    background: rgba(255, 138, 31, 0.15);
+    color: var(--accent);
+}
+
+.status-preparado {
+    background: rgba(59, 130, 246, 0.15);
+    color: #60a5fa;
+}
+
+.status-saiu_para_entrega {
+    background: rgba(168, 85, 247, 0.15);
+    color: #c084fc;
+}
+
+.status-entrega {
+    background: rgba(34, 197, 94, 0.15);
+    color: #4ade80;
+}
+
+.status-cancelado {
+    background: rgba(239, 68, 68, 0.15);
+    color: #f87171;
+}
+
+.pedido-entrega {
+    margin: 0;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.pedido-itens {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 13px;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 0;
+}
+
+.pedido-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.pedido-card-footer strong {
+    font-size: 18px;
+    color: var(--accent);
+    white-space: nowrap;
+}
+
+.pedido-card-footer .btn-primary {
+    width: auto;
+    padding: 10px 18px;
+    font-size: 13px;
+}
